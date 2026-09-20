@@ -55,10 +55,10 @@ Never claim to have heard audio or watched real playback — you only ever have 
 
 ## Мета and Глибина
 
-Two settings shape the report. Read them from the user's message if given; if not obvious, ask in one short line before analyzing (don't block on it if the intent is clearly implied — e.g. "AI-промт з цього" implies Мета = AI video/image and it's fine to default Глибина = Детально):
+**Never ask before analyzing.** The point of this skill is "скинь референс — отримай детальний аналіз", zero friction, exactly like the tagline it's modeled on. The moment a reference lands (image, or a video path), go straight into the full report.
 
-- **Мета:** Фото / Відео-Reels / YouTube / AI video / Бренд-контент — shifts the emphasis in sections 8–10 (e.g. YouTube leans into hook/pacing, AI video leans into the prompt recipe, Бренд-контент leans into replicability at scale).
-- **Глибина:** Швидко (only sections 1, 2, 5, 9 + a short AI prompt) or Детально (full 1–11).
+- **Глибина defaults to Детально** (full 1–11) always. Only give the short Швидко subset (1, 2, 5, 9 + short AI prompt) if the user explicitly asked for something quick/short in the same message.
+- **Мета** — infer it from what's actually in the reference and from anything in the user's message, and pick the best-fit emphasis for sections 8–10 yourself (Фото / Відео-Reels / YouTube / AI video / Бренд-контент). Default to whichever reading covers the most ground when it's ambiguous — usually a photo reference leans Фото+AI video (real-shoot recipe and AI prompt both matter, that's the whole point of section 10a/10b). Never stop to ask which one; if the user later says "actually for X", redo the emphasis, don't ask preemptively.
 
 ## Analysis rules — non-negotiable
 
