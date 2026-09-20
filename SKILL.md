@@ -34,6 +34,7 @@ She works across both real-world shoots and AI video/image generation (Veo, Klin
 - The user uploads 1–5 reference images (photos, screenshots, frame grabs).
 - The user gives the path to a local video file and asks for a breakdown.
 - The user asks to "проаналізувати", "розібрати", "recreate" a reference, or asks for an AI prompt built from a reference.
+- The user says she'll be adding her own photos of a specific person/garment/product and wants them placed into the reference's location, realistically — see **Identity + garment compositing mode** below; that mode replaces the standard report.
 
 If no reference has actually been provided yet, ask for it — do not analyze from memory or assume what an undescribed reference looks like.
 
@@ -88,6 +89,33 @@ Write the report in Ukrainian. Any prompt text meant to be pasted into an AI too
 11. **Теги** — 8–12 тегів для бібліотеки референсів
 
 **Режим "Швидко":** тільки пункти 1, 2, 5, 9 і короткий AI-промт (стиснута версія 10b).
+
+## Identity + garment compositing mode
+
+Triggers when the user says (in any phrasing) that she'll be adding her own reference photos of a specific person, dress, or product and wants *that exact* subject placed into the reference's location/scene, photorealistically — e.g. "я буду додавати фото дівчини в цьому платті", "постав мою модель у цю локацію", "має бути реалістично, як реальна фотографія". When this triggers, **skip the standard 11-point report** — she isn't asking what the reference photo is, she's asking for a generation recipe built from it. Only fall back to the full report if she explicitly also asks for the breakdown.
+
+Text-only prompts cannot hold face/garment identity consistent across a generation — that needs a tool that accepts reference images directly, not just a text description. Tell her that plainly if it's not obvious from context, and recommend (in order of current realism for this use case):
+- **Nano Banana (Gemini 2.5 Flash Image)** or **Flux Kontext** — take multiple reference images at once (face + garment + scene) and composite them directly; best current identity-preserving realism.
+- **Midjourney v7** — `--cref [face image]` for identity, `--sref` for the scene's visual style, as an alternative.
+
+Build the scene/composition/light/camera description the same rigorous FACT-vs-HYPOTHESIS way as sections 3–5 and 10a would — just feed it into this structure instead of the numbered report:
+
+```
+Combine these references into one photorealistic image:
+- Reference 1 (face/identity): use this exact person's face and identity, unchanged
+- Reference 2 (garment/product): [exact item from her reference], same cut/fabric/details as shown
+- Reference 3 (scene): [location, composition, and light pulled from the analyzed reference — camera height/angle, framing, backlight/light source and quality, time of day, key props]
+
+Pose/action: [pulled from the analyzed reference's actual moment]
+
+Camera: [lens/aperture/angle hypothesis from the reference, same rigor as section 3]
+
+Photographic realism (critical): genuine documentary/editorial photograph, natural skin texture with visible pores and subtle asymmetry, realistic fabric physics on the garment — natural wrinkles, drape, and movement consistent with the pose, accurate light wrap and shadow interaction matching the scene's light source, subtle film grain, natural color rendition, no digital smoothing
+
+Negative prompt: airbrushed or waxy skin, plastic/CGI look, perfectly symmetrical face, warped or extra fingers, garment that differs from the reference, face that differs from the reference photo, oversaturated HDR colors, flat studio lighting, cartoonish or illustrated look, visible AI artifacts
+```
+
+Fill every bracket from what's actually visible in the location/scene reference — don't genericize it. Deliver the finished block in its own fenced code block, ready to pair with her uploaded face/garment photos.
 
 ## Saving to a library (optional)
 
